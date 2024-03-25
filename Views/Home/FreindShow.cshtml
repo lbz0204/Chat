@@ -1,0 +1,384 @@
+﻿@model test.ViewModels.FCon
+
+@{
+    ViewBag.Title = "FreindShow";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignalR Simple Chat</title>
+    <style type="text/css">
+        .bblock {
+            border-radius: 25px;
+            margin-top: 100px;
+            border-style: solid;
+            border-color: green;
+            max-width: 30%;
+            max-height: 30%;
+            position: relative;
+            left: 20%;
+        }
+
+        .btitle {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btext {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            max-width: 80%;
+        }
+
+        .bimage {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            max-width: 50%;
+            max-height: 20%;
+        }
+
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            position: fixed;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: white;
+            color: black;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: blue;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                }
+
+        .content {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 50px;
+            border-style: solid;
+        }
+
+        .inputtext {
+            position: fixed;
+            top: 7px;
+            left: 400px;
+            width: 60%;
+            height: 5%;
+        }
+
+        .friendtext {
+            display: none;
+            position: fixed;
+            bottom: 50px;
+            right: 0;
+        }
+
+        .close {
+            color: red;
+            position: fixed;
+            bottom: 80px;
+            right: 160px;
+        }
+
+        .userdata {
+            top: 100px;
+            color: blue;
+            background-color: LightGray;
+            border-style: solid;
+            border-color: black;
+        }
+
+        .FriendN {
+        }
+
+        .list-group {
+        }
+
+        .msgto {
+        }
+
+        .container {
+            background-color: #99CCFF;
+            border: thick solid #808080;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .time {
+            color: blue;
+        }
+
+        .tableb {
+            display: none;
+            border-style: groove;
+            border-color: DodgerBlue;
+            position: fixed;
+            right: 150px;
+            bottom: 20px;
+        }
+
+        .tname {
+            border-style: groove;
+            color: black;
+            background-color: DodgerBlue;
+        }
+
+        .headp {
+            position: fixed;
+            top: 5px;
+            left: 100px;
+            border-radius: 12px;
+            border-style: ridge;
+        }
+
+        .dem {
+            position: fixed;
+            top: 0;
+            right: 50px;
+            display: none;
+        }
+
+        .bu {
+        }
+       
+    </style>
+    
+</head>
+<body>
+    @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="inputtext">
+            <input type="text" name="Name">
+            <input type="submit" value="搜尋">
+        </div>
+    }
+    <div class="userdata">
+        <ul>
+            <li> @Html.ActionLink("貼文", "ShowSelfArticle")</li>
+            <li> @Html.ActionLink("朋友", "ShowMyFriend")</li>
+            <li> @Html.ActionLink("登出", "Logout")</li>
+            <li> @Html.ActionLink("新增文章", "AddArticle")</li>
+            <li>@Html.ActionLink("新增大頭照", "UploadP")</li>
+            <li>@Html.ActionLink("群組", "AddGoup")</li>
+
+        </ul>
+    </div>
+
+    <div class="dem">
+        <ul id="demon">
+        </ul>
+        <button class="bu">向你送出邀請</button>
+    </div>
+
+    @if (Model.MImage != null)
+    {
+        <div class="headp">
+            @Model.MImage.Name
+            <img width="30" src="@Html.Encode(Url.Content("~/Images/"+@Model.MImage.A_Image))" />
+        </div>
+    }
+
+    @if (Model.Fc == null)
+    {
+        <h1>empty</h1>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+
+    }
+    else
+    {
+        <h1>Fail</h1>
+    }
+    @if (Model.Fc != null)
+    {
+        foreach (var sf in Model.Fc)
+        {
+            <a class="FriendN" href="#" id="@sf.Friend">@sf.Friend</a>
+        }
+    }
+    @Html.Action("ShowFArticle")
+    <button class="dropbtn">朋友</button>
+    <div class="content">
+        @if (Model.Fc != null)
+        {
+
+            if (!Model.Fc.Count.Equals(0))
+            {
+                foreach (var sf in Model.Fc)
+                {
+                    <a class="FriendN" href="#" id="@sf.Friend=">@sf.Friend</a>
+                }
+            }
+            else
+            {
+                <a class="FriendN" href="#" id=""></a>
+            }
+        }
+
+    </div>
+
+
+    <div>
+        @if (Model.Fc != null)
+        {
+            if (!Model.Fc.Count.Equals(0))
+            {
+                foreach (var sf in Model.Fc)
+                {
+
+                    <table class="tableb" id="@sf.Friend!">
+                        <tr><td class="tname">@sf.Friend</td></tr>
+                        @if (sf.Con != null)
+                        {
+                            foreach (var f in sf.Con)
+                            {
+                                <tr id="@sf.Friend">
+                                    @if (User.Identity.Name.Equals(f.Account_A) == true)
+                                    {
+                                        <td>@f.Account_A : @f.Content  <p class="time">@f.CreateTime </p></td>
+                                    }
+                                    else
+                                    {
+                                        <td>@f.Account_A : @f.Content  <p class="time">@f.CreateTime </p></td>
+                                    }
+                                </tr>
+                            }
+                        }
+
+                        <tr>
+                            <td>
+                                <div class=".friendtext" id="@sf.Friend+">
+                                    <textarea name="mes" style="width:200px; height:20px;" id="txt"></textarea><input type="submit" class="msgto" id="@sf.Friend-">
+                                    <button class="close" id="@sf.Friend/">x</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            }
+        }
+
+    </div>
+    <button  id="sf">test</button>
+    @section scripts {
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+        <script src="~/signalr/hubs"></script>
+        <script type="text/javascript">
+            $(function () {
+                var chat = $.connection.chatHub;
+                chat.client.UpdateMessage = function (who, msg, time) {
+
+                    var id = '#' + who;
+                    $(id).append($("<td></td>").attr("class", "list-group").text(who + ":" + msg + time));
+                };
+               
+                $.connection.hub.start().done(function () {
+                   
+                    $('.dropbtn').click(function () {
+                        var display = $('.content').css('display');
+                        if (display == 'none') {
+                            $('.content').css('display', 'block');
+                        }
+                        else {
+                            $('.content').css('display', 'none');
+                        }
+                    });
+                    $('.close').click(function (event) {
+                        var id = event.target.id;
+                        var d = id.substring(0, id.length - 1);
+                        d = d + '!';
+                        var dd = document.getElementById(d2);
+                        dd.setAttribute('style', 'display:none');
+                    });
+
+                    $('.FriendN').click(function (event) {
+                        var id = event.target.id;
+                        d = id.substring(0, id.length - 1);
+                        d2 = d + '!';
+                        var dd = document.getElementById(d2);
+                        dd.setAttribute('style', 'display:block');
+
+                    });
+
+                    $('.msgto').click(function (event) {
+                        var id = event.target.id;
+                        var d = id.substring(0, id.length - 1);
+                        chat.server.send(d, $("#txt").val());
+                        $('#txt').val('').focus();
+                    });
+
+
+                    $('.bu').click(function (event) {
+                        $('.dem').css('display', 'none');
+                        chat.server.sendInvite(event.target.id, "accept");
+                    });
+                });
+            });
+        </script>
+    }
+</body>
+</html>
+
+

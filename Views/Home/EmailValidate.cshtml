@@ -1,0 +1,16 @@
+﻿@model test.Models.Member
+
+@{
+    //ViewBag.Title = Model.Account;
+    ViewBag.Title = "register";
+}
+
+<h2>EmailValidate</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="text" name="validate" />
+    <input type="submit" value="驗證碼" />
+}
+
+

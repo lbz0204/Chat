@@ -1,0 +1,43 @@
+﻿@model test.Models.Product
+
+@{
+    ViewBag.Title = "UploadProduct";
+}
+
+<h2>UploadProduct</h2>
+
+@using (Html.BeginForm("UploadProduct", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.ValidationSummary(true)
+<table>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.name)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.name)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Image)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.Image, new { type = "file" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.price)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.price)
+        </td>
+    </tr>
+</table>
+    <input type="submit" value="新增" />
+
+}
+
+

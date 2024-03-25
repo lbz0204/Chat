@@ -1,0 +1,360 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    ul.nav {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        ul.nav li {
+            display: inline;
+        }
+
+    ul.block {
+        position: absolute;
+        left: 30%;
+        top: 20%;
+        width: 40%;
+        height: 30%;
+        border-style: solid;
+        border-color: #bbbbbb;
+        border-radius: 10px;
+    }
+
+    ul.block1 {
+        position: absolute;
+        left: 30%;
+        top: 55%;
+        width: 40%;
+        height: 40%;
+        border-style: solid;
+        border-color: #bbbbbb;
+        border-radius: 10px;
+    }
+
+    ul.block2 {
+        position: absolute;
+        left: 30%;
+        top: 100%;
+        width: 40%;
+        height: 30%;
+        border-style: solid;
+        border-color: #bbbbbb;
+        border-radius: 10px;
+    }
+
+    p.info {
+        position: absolute;
+        right: 18%;
+        top: 50%;
+        color: blue;
+        border-bottom-style: solid;
+        border-color: blue;
+    }
+
+    p.info1 {
+        position: absolute;
+        right: 18%;
+        top: 90%;
+        color: blue;
+        border-bottom-style: solid;
+        border-color: blue;
+    }
+
+    p.info2 {
+        position: absolute;
+        right: 18%;
+        top: 120%;
+        color: blue;
+        border-bottom-style: solid;
+        border-color: blue;
+    }
+
+    ul.block li {
+        margin: 10px;
+        border-style: outset;
+    }
+
+    ul.block1 li {
+        margin: 10px;
+        border-style: outset;
+    }
+
+    ul.block2 li {
+        margin: 10px;
+        border-style: outset;
+    }
+
+    .topmargin {
+        color: white;
+        letter-spacing: 5px;
+        border: 1px solid white;
+        background-color: green;
+    }
+
+    div.title {
+        text-align: center;
+        background-color: green;
+        color: white;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    p.talign {
+        text-align: right;
+    }
+
+    ul.v {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-bottom-style: solid;
+        border-color: gray;
+    }
+
+        ul.v li {
+            display: inline;
+        }
+
+    div.Footer {
+        position: absolute;
+        right: 10%;
+        top: 60%;
+        overflow-x: scroll;
+        width: 10%;
+        height: 30%;
+        border: 1px solid black;
+    }
+
+    p.exp {
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        color: gray;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    table {
+        position: absolute;
+        right: 0;
+        top: 20%;
+        width: 20%;
+        height: 30%;
+    }
+
+    td.Red {
+        color: red;
+    }
+
+    th.Red {
+        background-color: gray;
+        color: red;
+    }
+
+    th.White {
+        background-color: gray;
+        color: white;
+    }
+
+
+
+    ul { /* 取消ul預設的內縮及樣式 */
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        ul.drop-down-menu {
+            border: #ccc 1px solid;
+            display: inline-block;
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 13px;
+        }
+
+            ul.drop-down-menu li {
+                position: relative;
+                white-space: nowrap;
+                border-right: #ccc 1px solid;
+            }
+
+            ul.drop-down-menu > li:last-child {
+                border-right: none;
+            }
+
+            ul.drop-down-menu > li {
+                float: left; /* 只有第一層是靠左對齊*/
+            }
+
+            ul.drop-down-menu a {
+                background-color: #fff;
+                color: #333;
+                display: block;
+                padding: 0 30px;
+                text-decoration: none;
+                line-height: 40px;
+            }
+
+                ul.drop-down-menu a:hover { /* 滑鼠滑入按鈕變色*/
+                    background-color: green;
+                    color: #fff;
+                }
+
+            ul.drop-down-menu li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
+                background-color: green;
+                color: #fff;
+            }
+
+            ul.drop-down-menu ul {
+                border: #ccc 1px solid;
+                position: absolute;
+                z-index: 99;
+                left: -1px;
+                top: 100%;
+                min-width: 180px;
+            }
+
+                ul.drop-down-menu ul li {
+                    border-bottom: #ccc 1px solid;
+                }
+
+                    ul.drop-down-menu ul li:last-child {
+                        border-bottom: none;
+                    }
+
+                ul.drop-down-menu ul ul { /*第三層以後的選單出現位置與第二層不同*/
+                    z-index: 999;
+                    top: 10px;
+                    left: 90%;
+                }
+
+            ul.drop-down-menu ul { /*隱藏次選單*/
+                left: 99999px;
+                opacity: 0;
+                -webkit-transition: opacity 0.3s;
+                transition: opacity 0.3s;
+            }
+
+            ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
+                opacity: 1;
+                -webkit-transition: opacity 0.3s;
+                transition: opacity 0.3s;
+                left: -1px;
+                border-right: 5px;
+            }
+
+                ul.drop-down-menu li:hover > ul ul { /* 滑鼠滑入之後、次選單之後的選單依舊隱藏*/
+                    left: 99999px;
+                }
+
+            ul.drop-down-menu ul li:hover > ul { /* 第二層之後的選單展開位置*/
+                left: 90%;
+            }
+
+
+    li.Left {
+        position: absolute;
+        right: 30%;
+    }
+
+    li.Left1 {
+        position: absolute;
+        right: 20%;
+    }
+
+    li.Left2 {
+        position: absolute;
+        right: 15%;
+    }
+
+    li.Left3 {
+        position: absolute;
+        right: 10%;
+    }
+
+    div.p2 {
+        position: absolute;
+        top: 30%;
+        left: 80%;
+        height: 50%;
+        width: 30%;
+    }
+
+    div.p4 {
+        position: absolute;
+        top: 90%;
+        left: 80%;
+        height: 50%;
+        width: 30%;
+    }
+
+    p.title {
+        background-color: green;
+        color: white;
+        text-align: center;
+        width: 100%;
+        height: 10%;
+    }
+
+    p.p1 {
+        position: absolute;
+        left: 10%;
+        top: 30%;
+        width: 40%;
+        height: 60%;
+        border-style: solid;
+        border-color: green;
+    }
+
+    input {
+        width: 40%;
+        border-style: solid;
+        border-color: green;
+    }
+
+    textarea {
+        width: 40%;
+        height: 30%;
+        border-style: solid;
+        border-color: green;
+    }
+</style>
+<div class="title">
+    Chat
+</div>
+<ul class="v">
+    <li>回首頁</li>
+    <li>|</li>
+    <li>網站導覽</li>
+    <li>|</li>
+    <li>常見問題</li>
+    <li>|</li>
+
+</ul>
+<ul>
+    <li>@Html.ActionLink("登入", "Login", "Home")</li>
+    <hr />
+</ul>
+<div class="p2">
+    <img src="/Images/可樂.jpg" height="300" width="300">
+</div>
+<div class="p4">
+    <img src="~/Images/麥當勞.jpg" height="100" width="300">
+</div>
+
+<p class="p1">
+    <label>意見信箱</label><br />
+    <label>姓名:</label>
+    <input type="text"><br>
+    <label>E-mail帳號:</label>
+    <input type="text"><br>
+    <label>信件主旨:</label>
+    <input type="text"><br>
+    <label>信件內容:</label><br>
+    <textarea>請輸入信件內容</textarea>
+</p>

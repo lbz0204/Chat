@@ -1,0 +1,682 @@
+﻿@model test.ViewModels.Groups
+
+@{
+    ViewBag.Title = "AddGoup";
+}
+
+<style type="text/css">
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        position: fixed;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: white;
+        color: black;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: blue;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            li a:hover {
+                background-color: #111;
+            }
+
+    .content {
+        display: none;
+        position: fixed;
+        top: 60px;
+        right: 50px;
+        border-style: solid;
+    }
+
+    .inputtext {
+        
+        top: 70px;
+        left: 400px;
+        width: 60%;
+        height: 5%;
+    }
+
+    .friendtext {
+        display: none;
+        position: fixed;
+        bottom: 50px;
+        right: 0;
+    }
+
+    .close {
+        color: red;
+        position: fixed;
+        bottom: 80px;
+        right: 160px;
+    }
+
+    .userdata {
+        top: 100px;
+        color: blue;
+        background-color: LightGray;
+        border-style: solid;
+        border-color: black;
+    }
+
+    .FriendN {
+    }
+
+    .list-group {
+    }
+
+    .msgto {
+    }
+
+    .container {
+        background-color: #99CCFF;
+        border: thick solid #808080;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .time {
+        color: blue;
+    }
+
+    .tableb {
+        display: none;
+        border-style: groove;
+        border-color: DodgerBlue;
+        position: fixed;
+        right: 150px;
+        bottom: 20px;
+    }
+
+    .tname {
+        border-style: groove;
+        color: black;
+        background-color: DodgerBlue;
+    }
+
+    .headp {
+        position: fixed;
+        top: 5px;
+        left: 100px;
+        border-radius: 12px;
+        border-style: ridge;
+    }
+
+    .dem {
+        position: fixed;
+        top: 0;
+        right: 50px;
+        display: none;
+    }
+
+    .bm {
+    }
+
+    .mem {
+    }
+
+    .bu {
+    }
+
+    ul.nav {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        ul.nav li {
+            display: inline;
+        }
+
+    ul.block {
+        position: absolute;
+        left: 30%;
+        top: 20%;
+        width: 40%;
+        height: 30%;
+        border-style: solid;
+        border-color: #bbbbbb;
+        border-radius: 10px;
+    }
+
+    ul.block1 {
+        position: absolute;
+        left: 30%;
+        top: 55%;
+        width: 40%;
+        height: 40%;
+        border-style: solid;
+        border-color: #bbbbbb;
+        border-radius: 10px;
+    }
+
+    ul.block2 {
+        position: absolute;
+        left: 30%;
+        top: 100%;
+        width: 40%;
+        height: 30%;
+        border-style: solid;
+        border-color: #bbbbbb;
+        border-radius: 10px;
+    }
+
+    p.info {
+        position: absolute;
+        right: 18%;
+        top: 50%;
+        color: blue;
+        border-bottom-style: solid;
+        border-color: blue;
+    }
+
+    p.info1 {
+        position: absolute;
+        right: 18%;
+        top: 90%;
+        color: blue;
+        border-bottom-style: solid;
+        border-color: blue;
+    }
+
+    p.info2 {
+        position: absolute;
+        right: 18%;
+        top: 120%;
+        color: blue;
+        border-bottom-style: solid;
+        border-color: blue;
+    }
+
+    ul.block li {
+        margin: 10px;
+        border-style: outset;
+    }
+
+    ul.block1 li {
+        margin: 10px;
+        border-style: outset;
+    }
+
+    ul.block2 li {
+        margin: 10px;
+        border-style: outset;
+    }
+
+    .topmargin {
+        color: white;
+        letter-spacing: 5px;
+        border: 1px solid white;
+        background-color: green;
+    }
+
+    div.title {
+        text-align: center;
+        background-color: green;
+        color: white;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    p.talign {
+        text-align: right;
+    }
+
+    ul.v {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-bottom-style: solid;
+        border-color: gray;
+    }
+
+        ul.v li {
+            display: inline;
+        }
+
+    div.Footer {
+        position: absolute;
+        right: 10%;
+        top: 60%;
+        overflow-x: scroll;
+        width: 10%;
+        height: 30%;
+        border: 1px solid black;
+    }
+
+    p.exp {
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        color: gray;
+    }
+
+
+
+
+    td.Red {
+        color: red;
+    }
+
+    th.Red {
+        background-color: gray;
+        color: red;
+    }
+
+    th.White {
+        background-color: gray;
+        color: white;
+    }
+
+
+
+    ul { /* 取消ul預設的內縮及樣式 */
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        ul.drop-down-menu {
+            border: #ccc 1px solid;
+            display: inline-block;
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 13px;
+        }
+
+            ul.drop-down-menu li {
+                position: relative;
+                white-space: nowrap;
+                border-right: #ccc 1px solid;
+            }
+
+            ul.drop-down-menu > li:last-child {
+                border-right: none;
+            }
+
+            ul.drop-down-menu > li {
+                float: left; /* 只有第一層是靠左對齊*/
+            }
+
+            ul.drop-down-menu a {
+                background-color: #fff;
+                color: #333;
+                display: block;
+                padding: 0 30px;
+                text-decoration: none;
+                line-height: 40px;
+            }
+
+                ul.drop-down-menu a:hover { /* 滑鼠滑入按鈕變色*/
+                    background-color: green;
+                    color: #fff;
+                }
+
+            ul.drop-down-menu li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
+                background-color: green;
+                color: #fff;
+            }
+
+            ul.drop-down-menu ul {
+                border: #ccc 1px solid;
+                position: absolute;
+                z-index: 99;
+                left: -1px;
+                top: 100%;
+                min-width: 180px;
+            }
+
+                ul.drop-down-menu ul li {
+                    border-bottom: #ccc 1px solid;
+                }
+
+                    ul.drop-down-menu ul li:last-child {
+                        border-bottom: none;
+                    }
+
+                ul.drop-down-menu ul ul { /*第三層以後的選單出現位置與第二層不同*/
+                    z-index: 999;
+                    top: 10px;
+                    left: 90%;
+                }
+
+            ul.drop-down-menu ul { /*隱藏次選單*/
+                left: 99999px;
+                opacity: 0;
+                -webkit-transition: opacity 0.3s;
+                transition: opacity 0.3s;
+            }
+
+            ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
+                opacity: 1;
+                -webkit-transition: opacity 0.3s;
+                transition: opacity 0.3s;
+                left: -1px;
+                border-right: 5px;
+            }
+
+                ul.drop-down-menu li:hover > ul ul { /* 滑鼠滑入之後、次選單之後的選單依舊隱藏*/
+                    left: 99999px;
+                }
+
+            ul.drop-down-menu ul li:hover > ul { /* 第二層之後的選單展開位置*/
+                left: 90%;
+            }
+
+
+    li.Left {
+        position: absolute;
+        right: 30%;
+    }
+
+    li.Left1 {
+        position: absolute;
+        right: 20%;
+    }
+
+    li.Left2 {
+        position: absolute;
+        right: 15%;
+    }
+
+    li.Left3 {
+        position: absolute;
+        right: 10%;
+    }
+
+    div.p2 {
+        position: absolute;
+        top: 30%;
+        left: 80%;
+        height: 50%;
+        width: 30%;
+    }
+
+    div.p4 {
+        position: absolute;
+        top: 90%;
+        left: 80%;
+        height: 50%;
+        width: 30%;
+    }
+
+    p.title {
+        background-color: green;
+        color: white;
+        text-align: center;
+        width: 100%;
+        height: 10%;
+    }
+
+    p.p1 {
+        position: absolute;
+        left: 10%;
+        top: 30%;
+        width: 40%;
+        height: 60%;
+        border-style: solid;
+        border-color: green;
+    }
+
+    p.p2 {
+        position: absolute;
+        width: 60%;
+        height: 40%;
+        top: 70%;
+        left: 0%;
+        border-style: solid;
+        background-color: DarkGray;
+    }
+
+
+    textarea {
+        width: 40%;
+        height: 30%;
+        border-style: solid;
+        border-color: green;
+    }
+</style>
+<div class="title">
+    Chat
+</div>
+<ul class="v">
+    <li>回首頁</li>
+    <li>|</li>
+    <li>網站導覽</li>
+    <li>|</li>
+    <li>常見問題</li>
+    <li>|</li>
+
+</ul>
+<h2>AddGoup</h2>
+<div class="dem">
+    <ul id="demon">
+    </ul>
+    <button class="bu">向你要求加入</button>
+</div>
+@using (Html.BeginForm("SearchGoup", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="inputtext">
+        <input type="text" name="Name">
+        <input type="submit" value="搜尋">
+    </div>
+}
+<ul>
+    <li>@Html.ActionLink("創立群組", "CreateGroup")</li>
+</ul>
+<button class="dropbtn">團體</button>
+<div class="content">
+    @if (Model.GD != null)
+    {
+
+        if (!Model.GD.Count.Equals(0))
+        {
+            foreach (var sf in Model.GD)
+            {
+                <a class="GroupN" href="#" id="@sf.Group_Id">@sf.GroupName</a>
+            }
+        }
+        else
+        {
+            <a class="GroupN" href="#" id=""></a>
+        }
+    }
+
+</div>
+<div>
+    @if (Model.GD != null)
+    {
+        if (Model.GD.Count.Equals(0))
+        {
+            foreach (var sf in Model.GD)
+            {
+                <table class="tableb" id="@sf.Group_Id!">
+                    <tr><td class="tname" id="@sf.Group_Id">@sf.GroupName</td></tr>
+                    <tr><td><button class="bm" id="@sf.Group_Id)">顯示所有成員</button></td> </tr>
+                    @if (sf.AllCon != null)
+                    {
+                        foreach (var f in sf.AllCon)
+                        {
+                            <tr id="@sf.Group_Id^">
+                                <td>@f.Account_A : @f.Conv  <p class="time"> </p></td>
+                            </tr>
+                        }
+
+                        foreach (var fm in sf.AllMem)
+                        {
+                            <tr class="mem" id="@sf.Group_Id--">
+                                <td id="@fm.Account">@fm.Account<input name="smember" type="radio" id="@fm.Account" /></td>
+                                <td name="gmember" id="@sf.Group_Id @fm.Account"></td>
+                            </tr>
+                        }
+
+                    }
+                    <tr>
+                        <td>
+                            <div class=".friendtext" id="@sf.Group_Id+">
+                                <textarea name="mes" style="width:200px; height:20px;" id="txt"></textarea><input type="submit" class="msgto" id="@sf.Group_Id-">
+                                <button class="close" id="@sf.Group_Id/">x</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            }
+        }
+    }
+</div>
+<p class="p2">
+    歡迎使用Chat
+</p>
+<div>
+    @Html.ActionLink("回主頁", "FreindShow");
+
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+            var chat = $.connection.chatHub;
+            chat.client.UpdateGMessage = function (who, msg, gid) {
+
+                var id = '#' + who + "^";
+                $(gid).append($("<td></td>").attr("class", "list-group").text(who + ":" + msg));
+            };
+            chat.client.UpdateGM = function (who, gid, gname) {
+
+                $('.dem').css('display', 'block');
+                $('#demon').append($("<li></li>").attr("class", "list").text(who + "要求加入" + gname));
+                $('.bu').attr('id', gid + "," + who);
+
+            };
+            $.connection.hub.start().done(function () {
+
+                $(document).ready(function () {
+                    var g, m, t = getGInfo();
+                    chat.server.addAllMemtoGroup(g, m, t);
+                });
+                $('.dropbtn').click(function () {
+                    var display = $('.content').css('display');
+                    if (display == 'none') {
+                        $('.content').css('display', 'block');
+                    }
+                    else {
+                        $('.content').css('display', 'none');
+                    }
+                });
+                $('.close').click(function (event) {
+                    var id = event.target.id;
+                    var d = id.substring(0, id.length - 1);
+                    d = d + '!';
+                    var dd = document.getElementById(d2);
+                    dd.setAttribute('style', 'display:none');
+                });
+
+                $('.GroupN').click(function (event) {
+                    var id = event.target.id;
+                    d = id.substring(0, id.length - 1);
+                    d2 = d + '!';
+                    var dd = document.getElementById(d2);
+                    dd.setAttribute('style', 'display:block');
+
+                });
+
+                $('.msgto').click(function (event) {
+                    var id = event.target.id;
+                    var d = id.substring(0, id.length - 1);
+                    var arr = [];
+                    arr = getmem();
+                    if (arr == null) {
+                        chat.server.SendMessageGroup(0, d, arr, $("#txt").val());
+                    }
+                    else {
+                        chat.server.SendMessageGroup(1, d, arr, $("#txt").val());
+                    }
+                    $('#txt').val('').focus();
+                });
+                $('.bu').click(function (event) {
+                    var id = event.target.id;
+                    var s = id.split(',');
+                    var gid = s[0];
+                    var n = s[1];
+                    alert(gid)
+                    chat.server.addMemToGroup(n, gid);
+                });
+                function getmem() {
+                    var rate = document.smember;
+                    var arr = [];
+                    for (var i = 0; i < rate.length; i++) {
+                        if (rate[i].checked) {
+                            arr.push(rate[i].id);
+                        }
+                    }
+                    return arr;
+                }
+                function getGInfo() {
+                    var rate = document.gmember;
+                    var g = [];
+                    var m = [];
+                    var t = [];
+                    var tem = null;
+                    var index = 0;
+                    for (var i = 0; i < rate.length; i++) {
+                        var gn, gm = rate[i].split("");
+                        if (tem == null || tem == gn) {
+                            if (tem == null)
+                                g.push(gm);
+                            tem = gn;
+                            m.push(gm);
+                            index++;
+                        }
+                        else {
+                            t.push(index);
+                            tem = null;
+                            index = 0;
+                        }
+                    }
+                    return g, m, t;
+                }
+            });
+        });
+    </script>
+}

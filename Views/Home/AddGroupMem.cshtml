@@ -1,0 +1,64 @@
+﻿@model test.ViewModels.MemViewModel
+
+@{
+    ViewBag.Title = "AddGroupMem";
+}
+<style type="text/css">
+    .rc {
+    }
+    .ss {
+    }
+</style>
+<h2>AddGroupMem</h2>
+
+<button class="dropbtn">朋友</button>
+<div class="content">
+    @if (Model.Friend != null)
+    {
+
+        if (!Model.Friend.Count.Equals(0))
+        {
+            foreach (var sf in Model.Friend)
+            {
+                <a class="GroupN" href="#" id="@sf.Account @Model.GroupId @Model.GroupName">@sf.Name<input name="smember" class="rc" type="radio" id="@sf.Account,@Model.GroupId,@Model.GroupName" /></a>
+            }
+        }
+        else
+        {
+            <a class="GroupN" href="#" id=""></a>
+        }
+    }
+
+</div>
+<div>
+    @Html.ActionLink("Back to List", "AddGroup")
+</div>
+@section scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+            var chat = $.connection.chatHub;
+            $.connection.hub.start().done(function () {
+                $('.rc').change(function (event) {
+                    var id = event.target.id;
+                    var s = id.split(',');
+                    var name = s[0];
+                    var gid = s[1];
+                    var gn = s[2];
+                    chat.server.addFriendToGroup(name, gid, gn);
+                });
+                $('.ss').click()(function (event) {
+                    var id = event.target.id;
+                    var s = id.split(',');
+                    var name = s[0];
+                    var gid = s[1];
+                    var gn = s[2];
+                    chat.server.addFriendToGroup(name, gid, gn);
+                });
+
+            });
+        });
+    </script>
+}
